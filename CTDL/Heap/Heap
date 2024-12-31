@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+#define el '\n'
+#define st first
+#define nd second
+
+const int nm = 1e5 + 9;
+const long long INF = 1e18;
+const int MOD = 1e9 + 7;
+const int N = 2e3 + 9;
+
+void solve(){
+	priority_queue<int,vector<int>,greater<int>> pq; 
+	int n; cin >> n;
+	for (int i = 1; i <= n; i++){
+		int x; cin >> x; 
+		pq.push(x);
+	}
+	while (!pq.empty()){
+		cout << pq.top() << " "; pq.pop(); 
+	}
+}
+
+signed main (){
+	int t; t = 1;
+	while (t--){
+		solve();
+	}
+	return 0;
+}
