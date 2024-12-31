@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+#define el '\n'
+#define st first
+#define nd second
+
+const int nm = 5e5 + 9;
+const long long INF = 1e18;
+const int MOD = 1e9 + 7;
+const int N = 2e3 + 9;
+int cnt;
+priority_queue<int> pq;  
+void solve(){
+	string s; 
+	while(cin >> s){
+		if (s[0] == '+'){
+			int x = stoi(s);
+			pq.push(x);  
+		}
+		else if (s[0] == '-'){
+			int mx; 
+			if (!pq.empty()) mx = pq.top();
+			while (!pq.empty() && pq.top() == mx) pq.pop(); 
+//			cout << pq.size() << el; 
+		}
+	}
+	cout << pq.size() << el; 
+	while (!pq.empty()){
+		cout << pq.top() << " "; pq.pop(); 
+	}
+}
+
+signed main (){
+	int t; t = 1;
+	while (t--){
+		solve();
+	}
+	return 0;
+}
