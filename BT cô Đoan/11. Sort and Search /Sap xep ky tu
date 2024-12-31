@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+using namespace std; 
+const int nm = 1e6 + 9; 
+char c[nm];
+int main (){
+	int n; cin >> n; 
+	for (int i = 1; i <= n; i++) cin >> c[i];
+	sort (c + 1, c + 1 + n); 
+	for (int i = 1; i <= n; i++) cout << c[i] << " "; 
+	cout << endl; 
+	sort (c + 1, c + 1 + n, greater<char>()); 
+	for (int i = 1; i <= n; i++) cout << c[i] << " "; 
+	return 0; 
+}
