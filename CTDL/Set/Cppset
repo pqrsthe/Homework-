@@ -1,0 +1,92 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+set<int> se; 
+int main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	string op; 
+	while (cin >> op){
+		if (op == "0"){
+			break; 
+		}
+		else if (op == "1"){
+			int x; cin >> x; se.insert(x); 
+		}
+		else if (op == "2"){
+			int x; cin >> x; 
+			if (!se.empty()) 	se.erase(x);
+		}
+		else if (op == "3"){
+			if (se.empty()){
+				cout << "empty" << el; 
+			}
+			else cout << *se.begin() << el; 
+		}
+		else if (op == "4"){
+			if (se.empty()){
+				cout << "empty" << el; 
+			}
+			else cout << *se.rbegin() << el; 
+		}
+		else if (op == "5"){
+			int x; cin >> x; bool check = false; 
+			if (se.empty()){
+				check = true; 
+				cout << "empty" << el; 
+			}
+			auto it = se.upper_bound(x); 
+			if (!check &&it != se.end()){
+				cout << *it << el; 
+			}
+			else if (!check){
+				cout << "no" << el; 
+			}
+		}
+		else if (op == "6"){
+			int x; cin >> x; bool check = false; 
+			if (se.empty()){
+				check = true; 
+				cout << "empty" << el; 
+			}
+			auto it = se.lower_bound(x); 
+			if (!check &&it != se.end()){
+				cout << *it << el; 
+			}
+			else if (!check){
+				cout << "no" << el; 
+			}
+		}
+		else if (op == "7"){
+			int x; cin >> x; bool check = false; 
+			if (se.empty()){
+				check = true; 
+				cout << "empty" << el; 
+			}
+			auto it = se.lower_bound(x); 
+			if (!check && it != se.begin()){
+				--it; cout << *it << el; 
+			}
+			else if (!check){
+				cout << "no" << el; 
+			}
+		}
+		else if (op == "8"){
+			int x; cin >> x; bool check = false; 
+			if (se.empty()){
+				check = true; 
+				cout << "empty" << el; 
+			}
+			auto it = se.upper_bound(x);
+			if (!check && it != se.begin()){
+				--it; cout << *it << el; 
+			}
+			else if (!check){
+				cout << "no" << el; 
+			}
+		}
+	}
+	return 0;
+}
