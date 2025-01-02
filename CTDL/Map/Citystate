@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+map<pair<string,string>,long long> mp; 
+int main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int n; cin >> n; 
+	long long ans = 0;
+	for (int i = 1; i <= n; i++){
+		string a,b; cin >> a >> b; 
+		string c = ""; 
+		c = c + a[0] + a[1]; 
+//		cout << c << " " << b << el; 
+		if (b != c) ans += mp[make_pair(b,c)]; 
+		mp[{c,b}]++; 
+	}
+	cout << ans; 
+	return 0;
+}
