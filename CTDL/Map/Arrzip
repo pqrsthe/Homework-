@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+map<int,int> mp; 
+int a[nm],b[nm];
+
+int main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int n; cin >> n; 
+	for (int i = 1; i <= n; i++){
+		cin >> a[i]; b[i] = a[i];
+	}
+	sort (a + 1, a + 1 + n); 
+	int dem = 0; 
+	for (int i = 1; i <= n; i++){
+		if (mp[a[i]] == 0){
+			mp[a[i]] = ++dem; 
+		}
+	}
+	for (int i = 1; i <= n; i++) cout << mp[b[i]] << " "; 
+	return 0;
+}
