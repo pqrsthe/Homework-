@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+const int INF = 2e16; 
+#define el '\n'
+int ans = 0; 
+int n,k,a[nm]; 
+//6 5
+//1 9 1 9 1 1
+bool check(int val, int k){
+	int tong = 0, dem = 0; 
+	for (int i = 1; i <= n+1; i++){
+		if (tong + a[i] <= val){
+			tong = tong + a[i]; 
+		}
+		else{
+			tong = a[i]; 
+			if (i <= n && tong > val) return false; 
+			dem++; 
+		}
+	}
+	if (dem <= k) return true; 
+	return false; 
+}
+
+signed main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> n >> k; int mx = -1; 
+	for (int i = 1; i <= n; i++){
+		cin >> a[i]; mx = max(mx , a[i]); 
+	}
+	if (k == n){
+		cout << mx; return 0; 
+	}
+	int l = 1, r = INF;
+	a[n+1] = 1e18; 
+	while (l <= r){
+		int mid = (l + r) / 2; 
+		bool sta = check(mid,k); 
+		if (sta){ 
+			ans = mid; 
+			r = mid - 1; 
+		}
+		else l = mid + 1; 
+	}
+	cout << ans; 
+	return 0;
+}
