@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define int long long
+#define el '\n'
+#define st first
+#define nd second
+
+const int nm = 1e6 + 9;
+const long long INF = 1e18;
+const int MOD = 1e9 + 7;
+const int N = 2e3 + 9;
+// 1 2 5 10 
+int a[nm];
+map<int,int> d; 
+void solve(){
+	int sum = 1; 
+	int n; cin >> n;
+	for (int i = 1; i <= n; i++) cin >> a[i]; 
+	sort (a + 1, a + 1 + n); 
+	for (int i = 1; i <= n ; i++){ 
+		if (a[i] > sum){
+			cout << sum; return; 
+		}
+		sum += a[i];
+	}
+	cout << sum; 
+}
+
+signed main (){
+	int t; t = 1;
+	while (t--){
+		solve();
+	}
+	return 0;
+}
