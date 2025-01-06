@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+#define int long long
+
+void solve(){
+	set<int> se; 
+	map<int,int> mp;
+	int n; cin >> n; 
+	for (int i = 1; i <= n; i++){
+		int x; cin >> x; 
+		mp[x]++; 
+	}
+	int ans = -1;
+	for (auto i : mp){
+		if (i.second >= 4){
+			ans = max(ans , i.first * i.first); 
+		}
+		if (i.second >= 2){
+			se.insert(i.first); 
+		}
+	}
+	int cur1,cur2; 
+	if (!se.empty()){
+		cur1 = *se.rbegin(); se.erase(cur1);
+	}
+	if (!se.empty()){
+		cur2 = *se.rbegin(); 	
+		ans = max(ans , cur1 * cur2);
+	} 
+	cout << ans << el; 
+}
+
+main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int t; cin >> t;
+	while (t--){
+		solve();
+	}
+	return 0;
+}
