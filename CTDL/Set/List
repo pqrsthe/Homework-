@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+set<int> se; 
+vector <int> v; 
+
+int main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	char op; 
+	while (cin >> op){
+		if (op == '+'){
+			if (se.size() < 15000){
+				int x; cin >> x; 
+				se.insert(x);
+			}
+		}
+		else{
+		    if (!se.empty()){
+		     	int x = *se.rbegin();
+			    se.erase(x);   
+		    }
+		}
+	}
+	cout << se.size() << el; 
+	for (auto it : se){
+		v.push_back(it); 
+	}	
+	for (int i = v.size() - 1; i >= 0; i--) cout << v[i] << el; 
+	return 0;
+}
