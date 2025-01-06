@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+priority_queue<int> an,binh; 
+int a[nm],b[nm]; 
+stack<int> fir,sec; 
+
+main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int k,n,m; cin >> k >> n >> m; 
+	for (int i = 1; i <= n; i++){
+		cin >> a[i]; an.push(a[i]);
+	}
+	for (int i = 1; i <= m; i++){
+		cin >> b[i]; binh.push(b[i]); 
+	}
+	while (!an.empty() && !binh.empty()){
+		int dem = 0; 
+		while (!an.empty() && !binh.empty() && dem < k){
+			int cur1 = an.top(), cur2 = binh.top(); 
+			an.pop(); binh.pop();
+			if (cur1 > cur2) fir.push(cur1 - cur2); 
+			else if (cur1 < cur2) sec.push(cur2 - cur1); 
+			dem++; 
+		}
+		while (!fir.empty()){
+			an.push(fir.top()); fir.pop(); 
+		}
+		while (!sec.empty()){
+			binh.push(sec.top()); sec.pop(); 
+		}
+		dem = 0;
+	}
+	if (an.empty()){
+		cout << "Binh wins" << el; 
+		while (!binh.empty()){
+			cout << binh.top() << " "; binh.pop();
+		}
+		return 0; 
+	}
+	else{
+		cout << "An wins" << el; 
+		while (!an.empty()){
+			cout << an.top() << " "; an.pop();
+		}
+	}
+	return 0;
+}
