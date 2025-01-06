@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+set<pair<int,int>> se; 
+int main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int op; 
+	while (cin >> op){
+		if (op == 0){
+			return 0;
+		}
+		else if (op == 1){
+			int k,p; cin >> k >> p; 
+			se.insert({p , k});
+		}
+		else if (op == 2){
+			if (se.empty()){
+				cout << "0" << el; 
+			}
+			else{
+				pair <int,int> pos = *se.rbegin();
+				cout << pos.second << el; 	
+				se.erase(pos);
+			}
+		}
+		else{
+			if (se.empty()){
+				cout << "0" << el; 
+			}
+			else{
+				pair <int,int> pos = *se.begin();
+				cout << pos.second << el;
+				se.erase(pos);  	
+			}
+		}
+	}
+	return 0;
+}
