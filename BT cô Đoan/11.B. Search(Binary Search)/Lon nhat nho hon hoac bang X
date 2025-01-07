@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+vector<int> a; 
+
+int main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int n; cin >> n; int x; cin >> x; 
+	for (int i = 1; i <= n; i++){
+		int val; cin >> val; a.push_back(val);
+	}
+	auto it = upper_bound(a.begin(), a.end(), x); 
+	if (it != a.begin()){
+		--it; cout << *it; 
+	}
+	else cout << "NOT FOUND";
+	return 0;
+}
