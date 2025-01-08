@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+int a[nm],b[nm],n,m; 
+multiset <int> se; 
+		
+int main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> n >> m;
+	for (int i = 1; i <= n; i++){
+		cin >> a[i]; se.insert(a[i]); 
+	} 
+	for (int j = 1; j <= m; j++) cin >> b[j];
+	sort (a + 1, a + 1 + n);
+	for (int i = 1; i <= m; i++){
+		int cur = b[i]; 
+		auto pos = se.upper_bound(cur); 
+		if (pos != se.begin()){
+			pos--; cout << *pos << el; 
+			se.erase(pos); 
+		}
+		else cout << "-1" << el;
+	}
+	return 0;
+}
