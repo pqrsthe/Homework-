@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+int a[nm],b[nm];
+
+int main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int n,m; cin >> n >> m; 
+	for (int i = 1; i <= n; i++) cin >> a[i]; 
+	for (int i = 1; i <= m; i++) cin >> b[i]; 
+	int i = 1, j = 1, demA = 1, demB = 1; 
+	while (i <= n && j <= m){
+		if (a[i] <= b[j]){
+			cout << "A" << demA << " "; 
+			demA++; i++;
+		}
+		else{
+			cout << "B" << demB << " "; 
+			demB++; j++;
+		}
+	}
+	while (i <= n){
+		cout << "A" << demA << " "; demA++; i++; 
+	}
+	while (j <= m){
+		cout << "B" << demB << " "; demB++; j++;
+	}
+	return 0;
+}
