@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+#define int long long
+int a[nm],pre[nm]; 
+int n,k,dem;
+
+signed main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> n >> k; 
+	for (int i = 1; i <= n; i++){
+		cin >> a[i];
+	}
+	a[n + 1] = 1e17;
+	int j = 1, cur = 0, i = 1; 
+	while (i <= n && j <= n){
+		cur += a[j];
+		while (cur > k && i < j){
+			cur -= a[i]; i++;
+		} 
+		if (cur == k) dem++;
+		j++;
+	}
+	cout << dem;
+	return 0;
+}
