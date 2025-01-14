@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+bool used[N];
+int x[N],n; 
+
+void Print(){
+	for (int i = 0; i < n; i++) cout << x[i]; 
+	cout << el; 
+}
+
+void bt(int i){
+	for (int j = 0; j <= 1; j++){
+		if (!used[i]){
+			used[i] = true; 
+			x[i] = j; 
+			if (i == (n-1)){
+				for (int k = 0; k < n; ++k) cout << x[k]; cout << el; 
+			}
+			else bt(i+1);
+		}
+		used[i] = false; 
+	}
+}
+
+int main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> n; 
+	bt(0); 
+	return 0;
+}
