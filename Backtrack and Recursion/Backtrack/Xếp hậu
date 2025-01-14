@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+int n,x[N],k;
+bool Main[N], col[N], sub[N]; 
+
+void Print(){
+	for (int i = 1; i <= n; i++) cout << x[i] << " ";
+	cout << el; 
+}
+
+bool check(int i, int j){
+	if (Main[i - j + n] or sub[i + j] or col[j]) return false; 
+	return true; 
+}
+
+void bt(int i){
+	for (int j = 1; j <= n; j++){
+		if (check(i,j)){
+			x[i] = j; 
+			Main[i - j + n] = true;  
+			sub[i + j] = true; 
+			col[j] = true;
+			if (i == n) Print(); 
+			else bt(i + 1); 
+			Main[i - j + n] = false; 
+			sub[i + j] = false; 
+			col[j] = false;
+		}
+	}
+}
+
+signed main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> n; bt(1); 
+	return 0;
+}
