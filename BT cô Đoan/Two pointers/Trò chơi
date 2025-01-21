@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+#define int long long
+int n,ans = 1e18,a[nm],b[nm]; 
+map<int,int> mp; 
+
+signed main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> n; 
+	for (int i = 1; i <= n; i++) cin >> a[i]; 
+	for (int i = 1; i <= n; i++) cin >> b[i]; 
+	sort (a + 1, a + 1 + n); 
+	sort (b + 1, b + 1 + n, greater<int>()); 
+	int i = 1, j = 1;
+	while (i <= n && j <= n){
+		int cur = a[i] + b[j];
+		if (cur > 0){
+			j++; 
+		}
+		else if (cur < 0){
+			i++; 
+		}
+		else if (cur == 0){
+			cout << 0; return 0;
+		}
+		ans = min(ans , abs(cur)); 
+	}
+	cout << ans; 
+	return 0;
+}
