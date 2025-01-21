@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+int n,m,a[N][N],f[N][N],q; 
+
+signed main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> n >> m;
+	for (int i = 1; i <= n; i++)
+		for (int j = 1; j <= m; j++){
+			cin >> a[i][j]; 
+			f[i][j] = f[i - 1][j] + f[i][j - 1] - f[i - 1][j - 1] + a[i][j];
+		}
+	cin >> q; 
+	while (q--){
+		int l,r,u,v; cin >> l >> r >> u >> v; 
+		cout << f[u][v] - f[u][r - 1] - f[l - 1][v] + f[l - 1][r - 1] << el; 
+	}
+	return 0;
+}
