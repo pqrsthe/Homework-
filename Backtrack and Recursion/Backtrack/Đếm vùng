@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+#define int long long
+int dx[4] = {-1,0,0,1}; 
+int dy[4] = {0,-1,1,0};
+int S = -1,m,n; 
+int a[N][N];
+
+bool prime(int x){
+	if (x < 2) return false; 
+	for (int i = 2; i*i <= x; i++)
+		if (x % i == 0) return false; 
+	return true; 
+}
+
+void dfs(int x, int y){
+	a[x][y] = -1;  
+	for (int i = 0; i < 4; i++){
+		int u = x + dx[i]; 
+		int v = y + dy[i]; 
+		if (u >= 1 && u <= m && v >= 1 && v <= n && prime(a[u][v]))
+			dfs(u,v); 
+	}
+}
+
+signed main (){
+	int dem = 0;  
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> m >> n; 
+	for (int i = 1; i <= m; i++)
+		for (int j = 1; j <= n; j++)
+			cin >> a[i][j];
+	for (int i= 1; i <= m; i++)
+		for (int j = 1; j <= n; j++)
+			if (a[i][j] != -1&& prime(a[i][j])){
+				dfs(i,j);
+				dem++; 
+			} 
+	cout << dem;
+	return 0;
+}
