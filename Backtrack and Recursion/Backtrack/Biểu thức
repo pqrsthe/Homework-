@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+#define el '\n'
+int a[N],x[N]; 
+char dau[N],res[N]; 
+bool check = false,used[N]; 
+bool sta = false; 
+
+int calc(char res[], int x[]){
+	int cur = x[0]; 
+	for (int i = 0; i < 4; i++){
+		if (res[i] == '+') cur += x[i + 1]; 
+		else if (res[i] == '-') cur -= x[i + 1];
+		else if (res[i] == '*') cur *= x[i + 1]; 
+	}
+	return cur; 
+}
+
+void bt(int i, int x[]){
+	for (int j = 0; j < 3; j++){
+		res[i] = dau[j]; 
+		if (i == 3){
+//			for (int i = 0; i < 5; i++) cout << a[i] << " "; 
+//			for (int i = 0; i < 4; i++) cout << res[i] << " "; 
+//			cout << el; 
+			if (calc(res,x) == 23){
+				check = true; return; 
+			}  
+		}
+		else bt(i+1,x);
+	}
+}
+
+void bt_(int i){
+	for (int j = 0; j < 5; j++){
+		if (!used[j]){
+			used[j] = true; 
+			x[i] = a[j]; 
+			if (i == 4){
+				check = false; 
+				bt(0,x); 
+				if (check == true){
+					sta = true; return; 
+				}
+			}
+			else bt_(i+1);  
+			used[j] = false; 
+		}
+	}
+}
+
+signed main (){
+//	freopen ("Bieu thuc.inp","r",stdin); 
+//	freopen ("Bieu thuc.out","w",stdout);
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	for (int i = 0; i < 3; i++){
+		if (i == 0) dau[i] = '+';
+		else if (i == 1) dau[i] = '-';
+		else if (i == 2) dau[i] = '*';
+	}
+	while (cin >> a[0] >> a[1] >> a[2] >> a[3] >> a[4]){
+		fill(used, used + 10, false);
+		int d = 0, cnt = 4; 
+		for (int i = 0; i < 5; i++) if (a[i] == 0) d++; 
+		if (d == 5) return 0;
+		bt_(0); 
+		if (sta) cout << "Possible" << el; 
+		else cout << "Impossible" << el; 
+		sta = false;
+	}
+	return 0;
+}
