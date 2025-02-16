@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e2 + 9;
+#define el '\n'
+#define pii pair<int,int>
+int dx[4] = {0,-1,0,1};
+int dy[4] = {-1,0,1,0}; 
+int n,m,a[N][N], ans = 1e9; 
+bool used[N][N]; 
+vector<vector<pii>> res; 
+vector <pii> b; 
+
+void DFS(int x, int y, int depth, vector <pii> tmp){
+	used[x][y] = true; 
+//	tmp.push_back({x,y}); 
+	if (x == 1 or x == m or y == 1 or y == n)
+		if (a[x][y] == 0){
+			ans = min(ans , depth); 
+			res.push_back(tmp); 
+			return; 	
+		}
+	for (int i = 0; i < 4; i++){
+		int u = x + dx[i], v = y + dy[i]; 
+		if (!used[u][v]) {
+			if (a[u][v] == 0){
+				tmp.push_back({u,v}); 
+				DFS(u,v,depth+1, tmp); 
+				if (!tmp.empty()) tmp.pop_back();
+				used[u][v] = false;	
+			}
+		}
+	}
+}
+
+signed main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> m >> n; 
+	for (int i = 1; i <= m; i++)
+		for (int j = 1; j <= n; j++)
+			cin >> a[i][j]; 
+	int x,y; cin >> x >> y; 
+	DFS(x, y, 0, b); 
+	if (ans != 1e9) cout << ans << el;
+	else{
+		cout << -1; return 0;
+	}
+//	cout << res.size() << el;
+	for (auto i : res){
+		if (i.size() == ans){
+		for (auto j : i){
+			cout << j.first << " " << j.second << el; 
+		}
+		break; 
+	}
+//		cout << el; cout << el; 
+	}
+	return 0;
+}
