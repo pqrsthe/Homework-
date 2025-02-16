@@ -1,0 +1,111 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1000; 
+const int N = 300;
+#define el '\n'
+vector<int> adj[120]; 
+char a[N],b[N],tmp[N]; 
+int cnt1,cnt2,cnt;
+bool used[N],usedd[N]; 
+bool tim[N],check;
+string ans[nm]; 
+
+void dfs(int u, int desti){
+	usedd[u] = true; 
+	for (auto v : adj[u]){
+		if (v == desti){
+			check = true;
+//			cout << "YE" << el;  
+			return; 
+		}
+		if (!usedd[v]){
+			dfs(v,desti); 
+		}
+		usedd[v] = false; 
+	} 
+}
+
+void process(int cnt2){
+	for (int i = 1; i <= cnt2; i++) tim[b[i]] = true; 
+	for (int i = 1; i <= cnt2; i++){
+		if (i % 2 == 1){
+			adj[int(b[i] - 'a')].push_back(int(b[i+1]-'a'));
+		}
+	}
+}
+
+bool tt(char x, char y){
+	fill(usedd,usedd+27,false);
+	check = false; 
+	if (tim[x] == false or tim[y] == false) return true; 
+	else dfs(x-'a',y-'a'); 
+	fill(usedd,usedd+27,false);
+	if (check == false){
+		dfs(y-'a',x-'a'); 
+		if (check == false) check = true; 
+		else check = false; 
+	}
+	else{
+		check = false; 
+		dfs(y-'a',x-'a'); 
+		if (check == true) check = false;
+		else check = true; 
+	}
+//	cout << check << " " <<  x << " " << y << el; 
+	if (check == true) return true; 
+	return false;
+}
+
+bool checkk(int cnt1, char tmp[]){
+	for (int i = 1; i < cnt1; i++){
+		for (int j = i + 1; j <= cnt1; j++){
+			if (tt(tmp[i],tmp[j]) == false){
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+void print(int cnt1, char tmp[]){
+	string x = ""; 
+	for (int i = 1; i <= cnt1; i++) x = x + tmp[i];
+	ans[++cnt] = x; 
+}
+
+void bt(int i, int cnt1){
+	for (int j = 1; j <= cnt1; j++) 
+		if (!used[int(a[j]-'a')]){
+			tmp[i] = a[j]; 
+			used[int(a[j]-'a')] = true; 
+			if (i == cnt1){
+//				print(cnt1,tmp); 
+				if (checkk(cnt1,tmp)) print(cnt1,tmp);
+			}
+			else bt(i + 1,cnt1); 
+			used[int(a[j]-'a')] = false;
+		}
+}
+
+signed main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	string s,x; 
+	while (getline(cin,s) && getline(cin,x)){
+		cnt = 0; 
+		for (int i = 0; i < 26; i++) adj[i].clear();
+		fill(tim,tim + N-10,false); 
+		fill (used, used + N-10, false);
+		cnt1 = 0, cnt2 = 0;
+		for (int i = 0; i < s.size(); i++)
+			if (s[i] != ' ') a[++cnt1] = s[i]; 
+		for (int i = 0; i < x.size(); i++)
+			if (x[i] != ' ') b[++cnt2] = x[i];  
+		process(cnt2);
+		bt(1,cnt1); 
+		sort (ans + 1, ans + 1 + cnt);
+		for (int i = 1; i <= cnt; i++) cout << ans[i] << el; 
+		cout << el; 
+	}
+	return 0;
+}
