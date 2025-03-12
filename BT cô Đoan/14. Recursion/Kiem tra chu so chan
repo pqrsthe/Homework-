@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int nm = 1e6 + 9;
+const int N = 1e3 + 9;
+const int MOD = 1e9 + 7;
+#define el '\n'
+long long n; 
+bool even(long long n){
+	if (n < 10){
+		if (n & 1) return false; 
+		return true; 
+	}	
+	int dv = n % 10; 
+	if (dv % 2 == 0) return even(n/10);
+	else return false; 
+}
+
+signed main (){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> n; 
+	if (even(n)) cout << "YES"; 
+	else cout << "NO"; 
+	return 0;
+}
